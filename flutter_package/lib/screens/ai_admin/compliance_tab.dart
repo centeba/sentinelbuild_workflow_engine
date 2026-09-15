@@ -125,7 +125,7 @@ class _ComplianceTabState extends ConsumerState<ComplianceTab> {
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 420),
             child: DropdownButtonFormField<String>(
-              value: _policy,
+              initialValue: _policy,
               decoration: InputDecoration(
                 labelText: context.t('ai_admin.field.pii_policy'),
                 helperText: context.t('ai_admin.compliance.policy_help'),

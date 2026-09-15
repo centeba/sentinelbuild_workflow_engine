@@ -1,7 +1,9 @@
 // Web implementation of the browser download. Only compiled on web via the
 // conditional import in workflow_builder_screen.dart, so ``dart:html`` is safe
-// here (it never reaches the non-web/test build).
-// ignore_for_file: avoid_web_libraries_in_flutter
+// here (it never reaches the non-web/test build). dart:html is deprecated in
+// favour of package:web, but the blob/anchor download pattern has no stable
+// package:web equivalent yet, so keep it and suppress the notice here.
+// ignore_for_file: avoid_web_libraries_in_flutter, deprecated_member_use
 import 'dart:convert';
 import 'dart:html' as html;
 

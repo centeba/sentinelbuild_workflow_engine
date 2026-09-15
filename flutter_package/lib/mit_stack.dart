@@ -34,7 +34,7 @@
 /// New screens added to the package stay invisible to the host until
 /// they're explicitly listed here — every re-export pulls more code
 /// into the host's compile graph.
-library mit_stack;
+library;
 
 // API clients — host overrides these to inject baseUrl + auth.
 export 'services/api_client.dart' show dioProvider;

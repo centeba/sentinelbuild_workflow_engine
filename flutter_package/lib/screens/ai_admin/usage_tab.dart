@@ -50,10 +50,12 @@ class _UsageTabState extends ConsumerState<UsageTab> {
         _loading = false;
       });
     } catch (e) {
-      if (mounted) setState(() {
+      if (mounted) {
+        setState(() {
         _error = e.toString();
         _loading = false;
       });
+      }
     }
   }
 

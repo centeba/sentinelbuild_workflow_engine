@@ -201,7 +201,7 @@ class _AgentEditDialogState extends ConsumerState<AgentEditDialog> {
             const SizedBox(height: 10),
             Row(children: [
               Expanded(child: DropdownButtonFormField<String>(
-                value: _provider,
+                initialValue: _provider,
                 decoration: InputDecoration(labelText: context.t('ai_admin.field.provider')),
                 dropdownColor: AppTheme.bgRaised,
                 // Provider values are wire identifiers — kept untranslated.
@@ -235,7 +235,7 @@ class _AgentEditDialogState extends ConsumerState<AgentEditDialog> {
             // default; an explicit value can only tighten. See the PII & AI
             // Compliance screen for the company-wide default.
             DropdownButtonFormField<String>(
-              value: _piiPolicy,
+              initialValue: _piiPolicy,
               decoration: InputDecoration(
                 labelText: context.t('ai_admin.field.pii_policy'),
                 helperText: context.t('ai_admin.field.pii_policy_help'),
@@ -253,7 +253,7 @@ class _AgentEditDialogState extends ConsumerState<AgentEditDialog> {
             const SizedBox(height: 10),
             // Phase G — visibility scope selector.
             DropdownButtonFormField<String>(
-              value: _scope,
+              initialValue: _scope,
               decoration: InputDecoration(
                 labelText: context.t('ai_admin.field.scope'),
                 helperText: context.t('ai_admin.field.scope_help'),

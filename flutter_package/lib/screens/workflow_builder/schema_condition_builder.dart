@@ -307,7 +307,7 @@ class _LeafRow extends StatelessWidget {
     return ConstrainedBox(
       constraints: const BoxConstraints(minWidth: 120, maxWidth: 220),
       child: DropdownButtonFormField<String>(
-        value: (value as String?)?.isEmpty ?? true ? null : value,
+        initialValue: (value)?.isEmpty ?? true ? null : value,
         isDense: true,
         isExpanded: true,
         decoration: InputDecoration(
@@ -335,7 +335,7 @@ class _LeafRow extends StatelessWidget {
         return ConstrainedBox(
           constraints: BoxConstraints(minWidth: 140, maxWidth: width),
           child: DropdownButtonFormField<String>(
-            value: (leaf['value'] as String?)?.isEmpty ?? true ? null : leaf['value'] as String,
+            initialValue: (leaf['value'] as String?)?.isEmpty ?? true ? null : leaf['value'] as String,
             isDense: true, isExpanded: true,
             decoration: const InputDecoration(labelText: 'Value', isDense: true, border: OutlineInputBorder(), contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 6)),
             items: [for (final o in opts) DropdownMenuItem(value: o['value'] as String, child: Text(o['label'] as String? ?? o['value'] as String))],

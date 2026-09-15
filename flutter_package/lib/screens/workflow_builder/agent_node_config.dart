@@ -96,7 +96,7 @@ class _AgentNodeConfigState extends ConsumerState<AgentNodeConfig> {
       Text(context.t('agent_node.label'), style: AppTheme.labelStyle),
       const SizedBox(height: 4),
       DropdownButtonFormField<String>(
-        value: widget.agentId.isEmpty ? null : widget.agentId,
+        initialValue: widget.agentId.isEmpty ? null : widget.agentId,
         isExpanded: true,
         decoration: InputDecoration(
           isDense: true,

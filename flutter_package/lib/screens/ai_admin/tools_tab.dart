@@ -312,11 +312,7 @@ class _ToolsDataSource extends DataTableSource {
 
   bool _matches(Map<String, dynamic> r) {
     final hay = (
-      (r['name'] ?? '').toString() + ' ' +
-      (r['label'] ?? '').toString() + ' ' +
-      (r['description'] ?? '').toString() + ' ' +
-      (r['kind'] ?? '').toString() + ' ' +
-      (r['modality'] ?? '').toString()
+      '${r['name'] ?? ''} ${r['label'] ?? ''} ${r['description'] ?? ''} ${r['kind'] ?? ''} ${r['modality'] ?? ''}'
     ).toLowerCase();
     return hay.contains(_query);
   }

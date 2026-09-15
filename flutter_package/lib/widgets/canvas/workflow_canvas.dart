@@ -57,7 +57,7 @@ class _WorkflowCanvasState extends State<WorkflowCanvas> {
             // Zoom with mouse wheel
             final scale = event.scrollDelta.dy > 0 ? 0.9 : 1.1;
             final zoomed = _transformCtrl.value.clone()
-              ..scale(scale, scale);
+              ..scaleByDouble(scale, scale, 1.0, 1.0);
             _transformCtrl.value = zoomed;
           }
         },

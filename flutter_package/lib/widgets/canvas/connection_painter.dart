@@ -88,7 +88,7 @@ class ConnectionPainter extends CustomPainter {
     if (draggingFrom != null && draggingEnd != null) {
       final p1 = _outputPort(draggingFrom!);
       final draftPaint = Paint()
-        ..color = const Color(0xFF6366F1).withOpacity(0.5)
+        ..color = const Color(0xFF6366F1).withValues(alpha: 0.5)
         ..strokeWidth = 2
         ..style = PaintingStyle.stroke;
       _drawBezier(canvas, p1, draggingEnd!, draftPaint);
@@ -158,7 +158,7 @@ class ConnectionPainter extends CustomPainter {
       const Radius.circular(4),
     );
 
-    canvas.drawRRect(pillRect, Paint()..color = color.withOpacity(0.9));
+    canvas.drawRRect(pillRect, Paint()..color = color.withValues(alpha: 0.9));
     textPainter.paint(
       canvas,
       mid - Offset(textPainter.width / 2, textPainter.height / 2),

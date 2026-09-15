@@ -393,7 +393,7 @@ class _CategoryEditorDialogState extends State<_CategoryEditorDialog> {
           const SizedBox(height: 16),
           if (!isEdit)
             DropdownButtonFormField<String>(
-              value: _scope,
+              initialValue: _scope,
               decoration: InputDecoration(
                 labelText: context.t('mit_settings.scope'),
                 helperText: context.t('mit_settings.scope_helper'),

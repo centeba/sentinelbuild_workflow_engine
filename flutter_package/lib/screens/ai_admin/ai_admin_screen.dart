@@ -682,11 +682,7 @@ class _AgentsDataSource extends DataTableSource {
     // table cells render plus the description shown in the hover
     // tooltip.
     final hay = (
-      (r['name'] ?? '').toString() + ' ' +
-      (r['label'] ?? '').toString() + ' ' +
-      (r['description'] ?? '').toString() + ' ' +
-      (r['provider_type'] ?? '').toString() + ' ' +
-      (r['model_name'] ?? '').toString()
+      '${r['name'] ?? ''} ${r['label'] ?? ''} ${r['description'] ?? ''} ${r['provider_type'] ?? ''} ${r['model_name'] ?? ''}'
     ).toLowerCase();
     return hay.contains(_query);
   }
@@ -732,7 +728,7 @@ class _AgentsDataSource extends DataTableSource {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 6, vertical: 2),
                         decoration: BoxDecoration(
-                          color: AppTheme.textMuted.withOpacity(0.15),
+                          color: AppTheme.textMuted.withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: Row(
@@ -1327,11 +1323,7 @@ class _SkillsDataSource extends DataTableSource {
 
   bool _matches(Map<String, dynamic> r) {
     final hay = (
-      (r['name'] ?? '').toString() + ' ' +
-      (r['label'] ?? '').toString() + ' ' +
-      (r['description'] ?? '').toString() + ' ' +
-      (r['kind'] ?? '').toString() + ' ' +
-      (r['modality'] ?? '').toString()
+      '${r['name'] ?? ''} ${r['label'] ?? ''} ${r['description'] ?? ''} ${r['kind'] ?? ''} ${r['modality'] ?? ''}'
     ).toLowerCase();
     return hay.contains(_query);
   }
@@ -1369,7 +1361,7 @@ class _SkillsDataSource extends DataTableSource {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 6, vertical: 2),
                         decoration: BoxDecoration(
-                          color: AppTheme.textMuted.withOpacity(0.15),
+                          color: AppTheme.textMuted.withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: Row(
@@ -1468,7 +1460,7 @@ class _ActionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final disabled = onTap == null;
     final iconColor = disabled
-        ? AppTheme.textSecondary.withOpacity(0.4)
+        ? AppTheme.textSecondary.withValues(alpha: 0.4)
         : AppTheme.textSecondary;
     return Tooltip(
       message: tooltip,

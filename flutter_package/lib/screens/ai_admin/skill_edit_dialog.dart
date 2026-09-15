@@ -119,7 +119,7 @@ class _SkillEditDialogState extends ConsumerState<SkillEditDialog> {
             const SizedBox(height: 10),
             Row(children: [
               Expanded(child: DropdownButtonFormField<String>(
-                value: _kind,
+                initialValue: _kind,
                 decoration: InputDecoration(labelText: context.t('ai_admin.field.kind')),
                 dropdownColor: AppTheme.bgRaised,
                 // Kind values are wire identifiers — kept untranslated.
@@ -129,7 +129,7 @@ class _SkillEditDialogState extends ConsumerState<SkillEditDialog> {
               )),
               const SizedBox(width: 10),
               Expanded(child: DropdownButtonFormField<String>(
-                value: _modality,
+                initialValue: _modality,
                 decoration: InputDecoration(labelText: context.t('ai_admin.field.modality')),
                 dropdownColor: AppTheme.bgRaised,
                 items: _modalities.map((m) =>
@@ -140,7 +140,7 @@ class _SkillEditDialogState extends ConsumerState<SkillEditDialog> {
             const SizedBox(height: 10),
             if (_kind == 'python_tool')
               DropdownButtonFormField<String>(
-                value: _registry.any((r) => r['name'] == _content.text)
+                initialValue: _registry.any((r) => r['name'] == _content.text)
                     ? _content.text
                     : (_registry.isNotEmpty ? _registry.first['name'] as String : null),
                 decoration: InputDecoration(labelText: context.t('ai_admin.field.registry_tool')),

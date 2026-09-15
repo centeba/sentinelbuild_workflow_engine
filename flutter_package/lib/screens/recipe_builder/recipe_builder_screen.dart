@@ -213,7 +213,7 @@ class _RecipeBuilderScreenState extends ConsumerState<RecipeBuilderScreen> {
           style: TextStyle(fontSize: 12, color: AppTheme.textMuted));
     }
     return DropdownButtonFormField<String>(
-      value: _triggerKey,
+      initialValue: _triggerKey,
       isExpanded: true,
       decoration: const InputDecoration(
         labelText: 'Trigger event', border: OutlineInputBorder(), isDense: true),
@@ -274,7 +274,7 @@ class _RecipeBuilderScreenState extends ConsumerState<RecipeBuilderScreen> {
           Row(children: [
             Expanded(
               child: DropdownButtonFormField<String>(
-                value: step.nodeKey,
+                initialValue: step.nodeKey,
                 isExpanded: true,
                 decoration: const InputDecoration(
                     labelText: 'Action', border: OutlineInputBorder(), isDense: true),

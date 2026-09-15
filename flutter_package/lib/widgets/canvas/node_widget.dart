@@ -44,7 +44,7 @@ class NodeWidget extends StatelessWidget {
             ),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.08),
+                color: Colors.black.withValues(alpha: 0.08),
                 blurRadius: 8,
                 offset: const Offset(0, 2),
               ),
@@ -57,7 +57,7 @@ class NodeWidget extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                 decoration: BoxDecoration(
-                  color: meta.color.withOpacity(0.1),
+                  color: meta.color.withValues(alpha: 0.1),
                   borderRadius: const BorderRadius.vertical(top: Radius.circular(11)),
                 ),
                 child: Row(
@@ -77,7 +77,7 @@ class NodeWidget extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: onDelete,
-                      child: Icon(Icons.close, size: 14, color: meta.color.withOpacity(0.6)),
+                      child: Icon(Icons.close, size: 14, color: meta.color.withValues(alpha: 0.6)),
                     ),
                   ],
                 ),
@@ -102,7 +102,7 @@ class NodeWidget extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: const Color(0xFF064E3B),
                     borderRadius: BorderRadius.circular(6),
-                    border: Border.all(color: const Color(0xFF22C55E).withOpacity(0.4)),
+                    border: Border.all(color: const Color(0xFF22C55E).withValues(alpha: 0.4)),
                   ),
                   child: Row(children: [
                     const Icon(Icons.push_pin, size: 10, color: Color(0xFF22C55E)),

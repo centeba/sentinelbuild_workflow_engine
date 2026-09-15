@@ -508,7 +508,7 @@ class _RuleEditorDialogState extends ConsumerState<_RuleEditorDialog>
   List<Map<String, dynamic>> _actions = [];
   List<Map<String, dynamic>> _elseActions = [];
   bool _saving = false;
-  bool _aiGenerating = false;
+  final bool _aiGenerating = false;
 
   @override
   void initState() {
@@ -1521,7 +1521,7 @@ class _ConditionRow extends StatelessWidget {
         Expanded(
           flex: 3,
           child: DropdownButtonFormField<String>(
-            value: kOperators.any((o) => o['value'] == op) ? op : 'eq',
+            initialValue: kOperators.any((o) => o['value'] == op) ? op : 'eq',
             isDense: true,
             dropdownColor: AppTheme.bgRaised,
             style: const TextStyle(fontSize: 11, color: AppTheme.textPrimary),
@@ -1960,7 +1960,7 @@ class _ActionCard extends StatelessWidget {
         const SizedBox(height: 10),
         // Type selector
         _field('Action type', DropdownButtonFormField<String>(
-          value: type,
+          initialValue: type,
           isDense: true,
           dropdownColor: AppTheme.bgRaised,
           decoration: _dec(''),
@@ -2437,7 +2437,7 @@ class _DecisionRow extends StatelessWidget {
               child: Column(children: [
                 // Operator dropdown
                 DropdownButtonFormField<String>(
-                  value: ci < conditions.length
+                  initialValue: ci < conditions.length
                       ? (conditions[ci]['operator'] as String? ?? 'eq')
                       : 'eq',
                   isDense: true,
@@ -2445,7 +2445,9 @@ class _DecisionRow extends StatelessWidget {
                   style: const TextStyle(fontSize: 10, color: AppTheme.textPrimary),
                   decoration: _dec('op'),
                   onChanged: (v) {
-                    while (conditions.length <= ci) conditions.add({'operator': 'eq', 'value': ''});
+                    while (conditions.length <= ci) {
+                      conditions.add({'operator': 'eq', 'value': ''});
+                    }
                     conditions[ci] = {...conditions[ci], 'operator': v};
                     onChanged({...row, 'conditions': conditions});
                   },
@@ -2463,7 +2465,9 @@ class _DecisionRow extends StatelessWidget {
                             ? conditions[ci]['value'] as String? ?? ''
                             : ''),
                     onChanged: (v) {
-                      while (conditions.length <= ci) conditions.add({'operator': 'eq', 'value': ''});
+                      while (conditions.length <= ci) {
+                        conditions.add({'operator': 'eq', 'value': ''});
+                      }
                       conditions[ci] = {...conditions[ci], 'value': v};
                       onChanged({...row, 'conditions': conditions});
                     },
@@ -2489,7 +2493,9 @@ class _DecisionRow extends StatelessWidget {
                 controller: TextEditingController(
                     text: oi < outputs.length ? outputs[oi]['value'] as String? ?? '' : ''),
                 onChanged: (v) {
-                  while (outputs.length <= oi) outputs.add({'value': ''});
+                  while (outputs.length <= oi) {
+                    outputs.add({'value': ''});
+                  }
                   outputs[oi] = {'value': v};
                   onChanged({...row, 'outputs': outputs});
                 },

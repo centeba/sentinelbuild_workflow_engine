@@ -35,6 +35,7 @@ A practical reference for builders who want to collect data, automate decisions,
    - [Credentials](#47-credentials)
    - [Import & export](#48-import--export)
    - [Monitoring executions](#49-monitoring-executions)
+   - [Integrations](#410-integrations)
 5. [Recipes: Putting it all together](#5-recipes-putting-it-all-together)
 
 ---
@@ -1007,7 +1008,7 @@ By default, if a node fails (network error, timeout, exception), the entire work
 
 ### 4.7 Credentials
 
-Nodes that call external services need a **credential** — a stored API key, OAuth token, or connection string. Credentials are managed under **Settings → Integrations**.
+Nodes that call external services need a **credential** — a stored API key, OAuth token, or connection string. Credentials are managed on the **Integrations** page (see [§4.10](#410-integrations)).
 
 When configuring a node, select the credential from the `credential_id` dropdown. The runtime looks up the credential at execution time and injects it — your workflow definition never stores raw secrets.
 
@@ -1050,6 +1051,40 @@ Export format:
 **Run now**: on any active workflow card, click **Run** (▶ icon) to trigger a manual execution immediately. The input can be provided via API.
 
 **Temporal UI**: for deep debugging, the Temporal web UI is accessible at port 8088 (or as configured). Search by temporal workflow ID to see the full execution trace including retries and activity logs.
+
+### 4.10 Integrations
+
+The **Integrations** page (a tab in the React admin, a nav destination in the Flutter app) is where you connect the engine to external services so workflow nodes can act through them.
+
+**Catalogue** — the page lists every available **connector type** grouped by category (AI, Collaboration, Core, Data, Email, Payments, Storage, …): HTTP, Web Scraper, Claude, OpenAI, Slack, Notion, GitHub, Gmail, Outlook, Stripe, S3, Google Drive/Sheets, PostgreSQL, Twilio, and more. The catalogue is served from `GET /api/v1/integrations/catalogue` and defined in `backend/api/connectors.json`.
+
+**Add an integration** — click **Add** on a connector, give it a name, and (optionally) fill in config fields and pick a stored credential:
+- **API-key / config connectors** (HTTP, Stripe, S3, …): supply the config and select or create an API-key credential.
+- **OAuth connectors** (Gmail, Outlook, Google Drive/Sheets): click **Authorize with OAuth** to open the provider consent screen; the returned token is stored as a credential you can then select.
+
+Saved integrations appear under **Your integrations** with a **Delete** action.
+
+**How nodes use them** — a node references the credential by `credential_id` (see [§4.7](#47-credentials)); the runtime injects the secret at execution time, so definitions never hold raw secrets.
+
+**API** (all under `/api/v1`, JWT-authed):
+
+```bash
+# List available connector types
+curl -H "authorization: Bearer $TOKEN" localhost:8000/api/v1/integrations/catalogue
+
+# Create a named integration instance
+curl -X POST -H "authorization: Bearer $TOKEN" -H 'content-type: application/json' \
+  -d '{"connector_type":"stripe","name":"Stripe (prod)","credential_id":null,"config":{}}' \
+  localhost:8000/api/v1/integrations
+
+# List / delete configured integrations
+curl -H "authorization: Bearer $TOKEN" localhost:8000/api/v1/integrations
+curl -X DELETE -H "authorization: Bearer $TOKEN" localhost:8000/api/v1/integrations/<id>
+
+# Start an OAuth connect (google | microsoft) → returns {"auth_url": "..."}
+curl -H "authorization: Bearer $TOKEN" \
+  'localhost:8000/api/v1/oauth2/start?connector=google&name=My%20Gmail'
+```
 
 ---
 

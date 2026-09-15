@@ -23,12 +23,17 @@ AI steps.
    (see the user-guide docs).
 7. **AI nodes** — LLM agent steps via smart-llm (multi-provider, key store,
    budgets).
-8. **Integrations** — connectors and OAuth2 (`/integrations`, `/oauth2`,
-   `/credentials`).
+8. **Integrations** — a catalogue of external-service connectors
+   (`/integrations/catalogue`: HTTP, Claude, OpenAI, Slack, Gmail, Outlook,
+   Stripe, S3, and 20+ more) that tenants configure as named integration
+   instances (`/integrations`) backed by stored credentials (`/credentials`) or
+   the OAuth2 consent flow (`/oauth2`), managed from the admin UIs' Integrations
+   page.
 9. **Security** — SSRF egress guard, HMAC-signed webhooks, per-IP rate limiting,
    security headers, field encryption.
-10. **Admin UIs** — a Flutter package (full builder canvas + monitor) and a React
-    admin (workflows / executions / node palette).
+10. **Admin UIs** — a Flutter package (full builder canvas + monitor +
+    integrations) and a React admin (workflows / executions / forms / node
+    palette / integrations).
 11. **Operability** — health/readiness, structured logs, Prometheus metrics,
     OpenTelemetry traces (opt-in).
 
@@ -48,6 +53,10 @@ AI steps.
 - A workflow's per-node steps are visible via `/executions/{id}/nodes`.
 - An inactive workflow is not triggered by its configured trigger.
 - Outbound HTTP from action nodes is SSRF-guarded; webhooks are HMAC-signed.
+- `GET /integrations/catalogue` lists the available connector types; creating an
+  integration (`POST /integrations`) then deleting it (`DELETE
+  /integrations/{id}`) round-trips, and the instance is visible via
+  `GET /integrations` in between.
 - `alembic upgrade head` on an empty database creates every table.
 
 ## Non-functional requirements

@@ -13,6 +13,7 @@ from api.routers.auth import router as auth_router
 from api.routers.credentials import router as credentials_router
 from api.routers.executions import router as executions_router
 from api.routers.executions import ws_router
+from api.routers.forms import router as forms_router
 from api.routers.integrations import router as integrations_router
 from api.routers.internal import router as internal_router
 from api.routers.node_types import router as node_types_router
@@ -81,6 +82,7 @@ add_idempotency_middleware(app, get_redis)
 # API routes (all require auth except webhooks + public forms)
 app.include_router(auth_router, prefix="/api/v1")
 app.include_router(workflows_router, prefix="/api/v1")
+app.include_router(forms_router, prefix="/api/v1")
 app.include_router(executions_router, prefix="/api/v1")
 app.include_router(credentials_router, prefix="/api/v1")
 app.include_router(integrations_router, prefix="/api/v1")

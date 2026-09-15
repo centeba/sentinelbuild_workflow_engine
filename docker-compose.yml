@@ -96,6 +96,9 @@ services:
       - ENCRYPTION_KEY=${ENCRYPTION_KEY:-}
       - CORS_ORIGINS=${CORS_ORIGINS:-http://localhost:3000}
       - ENVIRONMENT=${ENVIRONMENT:-development}
+      # LOCAL DEV ONLY: token-less requests (the Flutter example) act as a seeded
+      # dev user. Ignored when ENVIRONMENT=production. Set DEV_AUTH_BYPASS=0 to disable.
+      - DEV_AUTH_BYPASS=${DEV_AUTH_BYPASS:-1}
     volumes:
       - ./backend:/app
     ports:

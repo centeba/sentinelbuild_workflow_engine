@@ -45,8 +45,9 @@ export 'services/api_client.dart' show dioProvider;
 export 'screens/ai_admin/ai_admin_api.dart'
     show aiAdminDioProvider, aiAdminApiProvider;
 
-// Embedded screens (alphabetical).
-export 'screens/ai_admin/ai_admin_screen.dart' show AiAdminScreen;
+// AI agent/skill/key management is intentionally NOT surfaced here — that is
+// the smart-llm package's concern (it ships its own admin). The workflow engine
+// only consumes smart-llm for agent *nodes* inside workflows.
 // Embeddable multi-model chat panel — host injects its Dio clients (+ optional
 // i18n and file-picker). Used by the chassis Chat screen and domain apps.
 export 'widgets/chat/chat_api.dart' show ChatApi, PickedFile;
@@ -58,7 +59,6 @@ export 'package:web_builder_renderer/web_builder_renderer.dart'
         BuilderTheme,
         registerBuilderTranslator;
 export 'screens/rules/rules_screen.dart' show RulesScreen;
-export 'screens/settings/settings_screen.dart' show SettingsScreen;
 export 'screens/workflow_builder/workflow_builder_screen.dart'
     show WorkflowBuilderScreen;
 export 'screens/workflows/workflows_screen.dart' show WorkflowsScreen;

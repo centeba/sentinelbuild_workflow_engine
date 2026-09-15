@@ -168,6 +168,46 @@ export interface NewWorkflow {
   trigger_config?: Record<string, unknown>;
 }
 
+export type FormFieldType =
+  | "text"
+  | "textarea"
+  | "number"
+  | "email"
+  | "date"
+  | "select"
+  | "checkbox";
+
+export interface FormField {
+  key: string;
+  label: string;
+  type: FormFieldType;
+  required: boolean;
+  placeholder?: string | null;
+  options: string[];
+}
+
+export interface FormSchema {
+  fields: FormField[];
+}
+
+export interface FormDef {
+  id: string;
+  org_id: string;
+  name: string;
+  description: string | null;
+  schema: FormSchema;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface FormInput {
+  name: string;
+  description?: string | null;
+  schema: FormSchema;
+  is_active?: boolean;
+}
+
 export const api = {
   workflows: () => request<Workflow[]>("GET", "/workflows"),
   workflow: (id: string) => request<Workflow>("GET", `/workflows/${id}`),
@@ -193,4 +233,11 @@ export const api = {
     request<NodeExecution[]>("GET", `/executions/${id}/nodes`),
 
   nodeRegistry: () => request<NodeRegistry>("GET", "/node-types/registry"),
+
+  forms: () => request<FormDef[]>("GET", "/forms"),
+  form: (id: string) => request<FormDef>("GET", `/forms/${id}`),
+  createForm: (data: FormInput) => request<FormDef>("POST", "/forms", data),
+  updateForm: (id: string, data: Partial<FormInput>) =>
+    request<FormDef>("PUT", `/forms/${id}`, data),
+  deleteForm: (id: string) => request<void>("DELETE", `/forms/${id}`),
 };

@@ -83,11 +83,46 @@ class CurrentUser:
         return [c] if c is not None else []
 
 
+_DEV_BYPASS_EMAIL = "dev@localhost.dev"
+
+
+async def _dev_bypass_user(db: AsyncSession) -> User:
+    """LOCAL DEV ONLY: get-or-create a stable seeded dev user.
+
+    Reached only when ``dev_auth_bypass`` is set (and not production), so the
+    token-less Flutter example can call the API without logging in.
+    """
+    from api.services import auth_service
+
+    result = await db.execute(select(User).where(User.email == _DEV_BYPASS_EMAIL))
+    user = result.scalar_one_or_none()
+    if user is not None:
+        return user
+    try:
+        _org, user = await auth_service.register(
+            db, "Dev Org", "dev", _DEV_BYPASS_EMAIL, "dev-bypass-not-a-real-password"
+        )
+        await db.commit()
+        return user
+    except Exception:  # raced with a concurrent create — re-fetch
+        await db.rollback()
+        result = await db.execute(select(User).where(User.email == _DEV_BYPASS_EMAIL))
+        return result.scalar_one()
+
+
 async def get_current_user(
     request: Request,
     credentials: Annotated[HTTPAuthorizationCredentials | None, Depends(bearer)],
     db: Annotated[AsyncSession, Depends(get_db)],
 ) -> CurrentUser:
+    # LOCAL DEV ONLY: for token-less requests (e.g. the Flutter example, which
+    # has no login), act as a seeded dev user instead of 401. A real token still
+    # goes through normal auth below, so the React app's login is unaffected.
+    # Guarded by the flag AND a non-production environment. Never enable in prod.
+    _dev = get_settings()
+    if _dev.dev_auth_bypass and _dev.environment != "production" and not credentials:
+        return CurrentUser(await _dev_bypass_user(db))
+
     _401 = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Invalid or expired token",

@@ -3,13 +3,15 @@ import { getToken, clearToken } from "./api";
 import { LoginPage } from "./pages/LoginPage";
 import { WorkflowsPage } from "./pages/WorkflowsPage";
 import { ExecutionsPage } from "./pages/ExecutionsPage";
+import { FormsPage } from "./pages/FormsPage";
 import { NodeTypesPage } from "./pages/NodeTypesPage";
 
-type Tab = "workflows" | "executions" | "nodes";
+type Tab = "workflows" | "executions" | "forms" | "nodes";
 
 const TABS: { id: Tab; label: string }[] = [
   { id: "workflows", label: "Workflows" },
   { id: "executions", label: "Executions" },
+  { id: "forms", label: "Forms" },
   { id: "nodes", label: "Node Types" },
 ];
 
@@ -46,6 +48,7 @@ export function App() {
       <main className="content">
         {tab === "workflows" && <WorkflowsPage />}
         {tab === "executions" && <ExecutionsPage />}
+        {tab === "forms" && <FormsPage />}
         {tab === "nodes" && <NodeTypesPage />}
       </main>
     </div>

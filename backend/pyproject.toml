@@ -15,7 +15,7 @@ dependencies = [
     # smart-llm provides the agentic LLM layer, key store, observability +
     # service-runtime rails. Pinned to a public commit; bump the ref to pull
     # upstream fixes (see README "Updating smart-llm").
-    "smart-llm[db,observability] @ git+https://github.com/centeba/smart-llm@ad295adca2fb44f0a49e91883942f1778bb2d789",
+    "smart-llm[db,observability] @ git+https://github.com/centeba/smart-llm@a1dbed6eeffff7f6425586b407081823db63f1c2",
     "fastapi>=0.136.0,<0.137.0",
     "uvicorn[standard]>=0.45.0",
     "sqlalchemy[asyncio]>=2.0.49",

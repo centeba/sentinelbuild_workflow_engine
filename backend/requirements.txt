@@ -56,7 +56,7 @@ dukpy==0.6.0  # SEC H8 — was 0.3.1 (JS-eval engine, keep current)
 # Pinned to a public commit of the standalone smart-llm repo; bump the ref to
 # pull upstream fixes (see README "Updating smart-llm"). Requires `git` in the
 # build image.
-smart-llm[db,observability] @ git+https://github.com/centeba/smart-llm@ad295adca2fb44f0a49e91883942f1778bb2d789
+smart-llm[db,observability] @ git+https://github.com/centeba/smart-llm@a1dbed6eeffff7f6425586b407081823db63f1c2
 
 # Utils
 python-dotenv==1.2.2  # SEC H8 — was 1.0.0 (CVE-2026-28684 symlink file overwrite)

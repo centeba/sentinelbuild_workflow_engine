@@ -170,7 +170,7 @@ class _ToolParamsFormState extends ConsumerState<ToolParamsForm> {
             helperText: helper,
             helperMaxLines: 3,
           ),
-          value: current?.toString(),
+          initialValue: current?.toString(),
           items: [
             for (final v in enumValues)
               DropdownMenuItem(value: v.toString(), child: Text(v.toString())),

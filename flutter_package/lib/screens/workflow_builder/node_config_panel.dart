@@ -39,10 +39,14 @@ class _NodeConfigPanelState extends ConsumerState<NodeConfigPanel> {
       for (final f in _fields)
         f.key: TextEditingController(text: widget.node.config[f.key]?.toString() ?? ''),
     };
-    for (final ctrl in _controllers.values) ctrl.addListener(_emit);
+    for (final ctrl in _controllers.values) {
+      ctrl.addListener(_emit);
+    }
   }
 
-  void _disposeControllers() { for (final c in _controllers.values) c.dispose(); }
+  void _disposeControllers() { for (final c in _controllers.values) {
+    c.dispose();
+  } }
   void _emit() { widget.onConfigChanged({for (final f in _fields) f.key: _controllers[f.key]!.text}); }
 
   @override

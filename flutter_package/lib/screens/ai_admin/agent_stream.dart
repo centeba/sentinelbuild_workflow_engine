@@ -64,10 +64,7 @@ Uri _buildWsUri(String agentId) {
     defaultValue: '/api/integration-hub/v1',
   );
   final wsBase = kIsWeb
-      ? (Uri.base.scheme == 'https' ? 'wss' : 'ws') +
-          '://' +
-          Uri.base.host +
-          (Uri.base.port == 0 ? '' : ':${Uri.base.port}')
+      ? '${Uri.base.scheme == 'https' ? 'wss' : 'ws'}://${Uri.base.host}${Uri.base.port == 0 ? '' : ':${Uri.base.port}'}'
       : 'ws://localhost';
   return Uri.parse('$wsBase$basePath/ws/ai-agents/$agentId/stream');
 }

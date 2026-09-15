@@ -77,7 +77,7 @@ class _PlatformKeysTabState extends ConsumerState<PlatformKeysTab> {
             mainAxisSize: MainAxisSize.min,
             children: [
               DropdownButtonFormField<String>(
-                value: 'anthropic',
+                initialValue: 'anthropic',
                 decoration: const InputDecoration(labelText: 'Provider'),
                 items: const [
                   DropdownMenuItem(value: 'anthropic', child: Text('anthropic')),

@@ -183,6 +183,7 @@ class _WorkflowBuilderScreenState extends ConsumerState<WorkflowBuilderScreen> {
       builder: (_) => const _ImportDialog(),
     );
     if (result == null || result.isEmpty) return;
+    if (!mounted) return; // dialog awaited above — guard context use across the gap
     try {
       final data = json.decode(result) as Map<String, dynamic>;
       final dio = ref.read(dioProvider);

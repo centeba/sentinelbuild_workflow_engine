@@ -239,7 +239,7 @@ class _SchemaDrivenConfigFormState
             helperText: helper,
             helperMaxLines: 3,
           ),
-          value: current?.toString(),
+          initialValue: current?.toString(),
           items: [
             for (final v in enumValues)
               DropdownMenuItem(value: v.toString(), child: Text(v.toString())),
@@ -364,7 +364,7 @@ class ReferenceField extends ConsumerStatefulWidget {
   final String? helper;
   final void Function(String? value) onChanged;
 
-  const ReferenceField({
+  const ReferenceField({super.key, 
     required this.fieldKey,
     required this.spec,
     required this.currentValue,
@@ -479,7 +479,7 @@ class ReferenceFieldState extends ConsumerState<ReferenceField> {
         helperText: widget.helper,
         helperMaxLines: 3,
       ),
-      value: widget.currentValue?.toString(),
+      initialValue: widget.currentValue?.toString(),
       items: [
         for (final opt in _options)
           DropdownMenuItem(

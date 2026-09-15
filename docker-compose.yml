@@ -129,9 +129,31 @@ services:
       - ./backend:/app
     command: python -m temporal.worker
 
-  # Admin UIs are run separately during development:
-  #   - react-admin:     cd react-admin && npm install && npm run dev  (Vite proxies /api → api)
-  #   - flutter_package: see flutter_package/example
+  # ── Admin UIs (nginx-served production builds; each proxies /api → api) ──────
+  # For local dev with hot-reload instead, run them directly:
+  #   react-admin:     cd react-admin && npm install && npm run dev
+  #   flutter example: cd flutter_package/example && flutter run -d chrome
+  react-admin:
+    build:
+      context: ./react-admin
+      dockerfile: Dockerfile
+    container_name: mitstack-react-admin
+    restart: unless-stopped
+    depends_on:
+      - api
+    ports:
+      - "5175:80"
+
+  flutter-web:
+    build:
+      context: ./flutter_package
+      dockerfile: Dockerfile
+    container_name: mitstack-flutter-web
+    restart: unless-stopped
+    depends_on:
+      - api
+    ports:
+      - "3000:80"
 
 volumes:
   postgres_data:

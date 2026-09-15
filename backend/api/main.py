@@ -21,7 +21,6 @@ from api.routers.oauth2 import router as oauth2_router
 from api.routers.rule_flows import router as rule_flows_router
 from api.routers.rules import router as rules_router
 from api.routers.scraper import router as scraper_router
-from api.routers.translations import router as translations_router
 from api.routers.workflows import router as workflows_router
 from api.routers.workflows import webhook_router
 from shared.config import get_settings
@@ -94,7 +93,6 @@ app.include_router(scraper_router, prefix="/api/v1")
 
 # Public routes (no auth)
 app.include_router(webhook_router, prefix="/api/v1")
-app.include_router(translations_router, prefix="/api/v1")
 
 # Internal service-to-service API (M2M, no user JWT)
 app.include_router(internal_router, prefix="/api/v1")

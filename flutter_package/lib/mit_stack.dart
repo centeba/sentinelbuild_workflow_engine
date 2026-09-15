@@ -36,6 +36,9 @@
 /// into the host's compile graph.
 library;
 
+// Self-contained i18n: bundled English strings + the context.t() extension.
+export 'i18n/translate_extension.dart' show Translations;
+
 // API clients — host overrides these to inject baseUrl + auth.
 export 'services/api_client.dart' show dioProvider;
 

@@ -13,9 +13,6 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  multi_lang_sdk:
-    path: ./vendor/multi_lang_sdk
-
   # Shared design system — mit_stack re-exports AppTheme/ThemeBrand from
   # here (lib/theme.dart). Vendored under vendor/ to keep this repo standalone.
   sentinel_branding:
@@ -72,3 +69,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/i18n/mit_stack_en.json

@@ -24,14 +24,16 @@ class FormSchema(BaseModel):
 class FormCreate(BaseModel):
     name: str = Field(min_length=1, max_length=255)
     description: str | None = None
-    schema: FormSchema = Field(default_factory=FormSchema)
+    # A field named ``schema`` shadows pydantic's deprecated BaseModel.schema
+    # method (typed as a callable); the field is valid and works at runtime.
+    schema: FormSchema = Field(default_factory=FormSchema)  # type: ignore[assignment]
     is_active: bool = True
 
 
 class FormUpdate(BaseModel):
     name: str | None = Field(default=None, max_length=255)
     description: str | None = None
-    schema: FormSchema | None = None
+    schema: FormSchema | None = None  # type: ignore[assignment]
     is_active: bool | None = None
 
 
@@ -42,7 +44,7 @@ class FormResponse(BaseModel):
     org_id: uuid.UUID
     name: str
     description: str | None
-    schema: dict[str, Any]
+    schema: dict[str, Any]  # type: ignore[assignment]
     is_active: bool
     created_at: datetime
     updated_at: datetime

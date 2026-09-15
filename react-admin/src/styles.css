@@ -146,3 +146,30 @@ button.ghost:hover { color: var(--accent); }
 
 .error { color: var(--bad); background: var(--bad-weak); border-radius: var(--radius); margin-top: 14px; padding: 12px 16px; }
 .error button { margin-top: 8px; }
+
+button.primary {
+  background: var(--accent); color: #fff; border-color: var(--accent);
+}
+button.primary:hover:not(:disabled) { filter: brightness(1.05); border-color: var(--accent); }
+button.block { width: 100%; margin: 12px 0; }
+.logout { margin-left: auto; }
+
+/* Forms */
+label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--muted); margin-top: 10px; }
+label input, label select { font: inherit; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; }
+label input:focus, label select:focus { outline: 2px solid var(--accent-weak); border-color: var(--accent); }
+.newform { display: flex; flex-direction: column; }
+.row-actions { display: flex; gap: 8px; margin-top: 12px; }
+
+/* Login */
+.login-wrap { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
+.login-card {
+  width: 100%; max-width: 380px; background: var(--surface);
+  border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow);
+  padding: 28px;
+}
+.brand-lg { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; text-align: center; margin-bottom: 18px; }
+.seg { display: flex; gap: 4px; background: var(--bg); border-radius: 10px; padding: 4px; }
+.seg button { flex: 1; border: none; background: transparent; color: var(--muted); padding: 8px; border-radius: 7px; cursor: pointer; }
+.seg .seg-on { background: var(--surface); color: var(--accent); font-weight: 600; box-shadow: var(--shadow); }
+.login-card .primary { width: 100%; margin-top: 18px; padding: 10px; }

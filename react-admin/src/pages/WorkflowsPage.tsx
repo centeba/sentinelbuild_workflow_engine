@@ -4,6 +4,8 @@ import type { Workflow } from "../api";
 import { useResource } from "../useResource";
 import { Async, ActiveBadge, StatusPill } from "../ui";
 
+const TRIGGERS = ["manual", "webhook", "schedule", "event"];
+
 export function WorkflowsPage() {
   const list = useResource(() => api.workflows(), []);
   const [selected, setSelected] = useState<string | null>(null);
@@ -11,8 +13,16 @@ export function WorkflowsPage() {
   return (
     <section className="split">
       <div className="split-list">
-        <h1>Workflows</h1>
+        <div className="detail-head">
+          <h1>Workflows</h1>
+        </div>
         <p className="muted">Definitions and their triggers.</p>
+        <NewWorkflowForm
+          onCreated={(id) => {
+            list.reload();
+            setSelected(id);
+          }}
+        />
         <Async state={list}>
           {(workflows) =>
             workflows.length === 0 ? (
@@ -47,6 +57,66 @@ export function WorkflowsPage() {
         )}
       </div>
     </section>
+  );
+}
+
+function NewWorkflowForm({ onCreated }: { onCreated: (id: string) => void }) {
+  const [open, setOpen] = useState(false);
+  const [name, setName] = useState("");
+  const [trigger, setTrigger] = useState("manual");
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function create(e: React.FormEvent) {
+    e.preventDefault();
+    setBusy(true);
+    setError(null);
+    try {
+      const wf = await api.createWorkflow({ name, trigger_type: trigger });
+      setName("");
+      setOpen(false);
+      onCreated(wf.id);
+    } catch (err) {
+      setError(err instanceof ApiError ? `${err.status}: ${err.message}` : "Create failed");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  if (!open) {
+    return (
+      <button className="primary block" onClick={() => setOpen(true)}>
+        + New workflow
+      </button>
+    );
+  }
+
+  return (
+    <form className="card newform" onSubmit={create}>
+      <label>
+        Name
+        <input value={name} onChange={(e) => setName(e.target.value)} autoFocus required />
+      </label>
+      <label>
+        Trigger
+        <select value={trigger} onChange={(e) => setTrigger(e.target.value)}>
+          {TRIGGERS.map((t) => (
+            <option key={t} value={t}>
+              {t}
+            </option>
+          ))}
+        </select>
+      </label>
+      {error ? <div className="error pad">{error}</div> : null}
+      <div className="row-actions">
+        <button className="primary" type="submit" disabled={busy}>
+          {busy ? "Creating…" : "Create"}
+        </button>
+        <button type="button" className="ghost" onClick={() => setOpen(false)}>
+          Cancel
+        </button>
+      </div>
+    </form>
   );
 }
 

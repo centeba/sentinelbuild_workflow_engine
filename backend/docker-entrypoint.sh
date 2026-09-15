@@ -23,7 +23,7 @@ _retry_migrate() {
   done
 }
 
-cd /app/services/mit-stack/backend
+cd /app
 echo "[entrypoint] alembic upgrade head"
 _retry_migrate alembic upgrade head
 echo "[entrypoint] starting: $*"

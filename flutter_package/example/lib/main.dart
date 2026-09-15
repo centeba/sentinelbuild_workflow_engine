@@ -1,36 +1,28 @@
-/// Example: embedding Mit Stack into a separate Flutter app.
+/// Example: embedding a Mit Stack screen into a Flutter app.
 ///
-/// In your host app's pubspec.yaml:
-///
-/// ```yaml
-/// dependencies:
-///   flutter:
-///     sdk: flutter
-///   flutter_riverpod: ^2.5.1
-///   mit_stack:
-///     path: ../../frontend     # adjust path to your checkout
-/// ```
+/// The package exposes individual screens (WorkflowsScreen, RulesScreen,
+/// SettingsScreen, WorkflowBuilderScreen, AiAdminScreen, …) rather than a single
+/// wrapper widget, so a host app composes them into its own navigation. Point
+/// the API base URL with `--dart-define=API_BASE_URL=https://api.example.com`.
+library;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mit_stack/mit_stack_app.dart';
+import 'package:mit_stack/mit_stack.dart';
 
 void main() {
-  runApp(
-    const ProviderScope(
-      child: MitStackApp(
-        config: MitStackConfig(
-          // Point to your deployed API
-          apiBaseUrl: 'https://api.mycompany.com',
-          appName: 'Acme Automation',
+  runApp(const ProviderScope(child: ExampleApp()));
+}
 
-          // Disable builder tools for mobile-only deployments:
-          // enableWorkflowBuilder: false,
-          // enableFormBuilder: false,
+class ExampleApp extends StatelessWidget {
+  const ExampleApp({super.key});
 
-          // Custom mobile breakpoint (default 768):
-          // mobileBreakpoint: 600,
-        ),
-      ),
-    ),
-  );
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Workflow Engine',
+      debugShowCheckedModeBanner: false,
+      home: const WorkflowsScreen(),
+    );
+  }
 }

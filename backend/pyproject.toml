@@ -53,6 +53,7 @@ dev = [
     "pytest-asyncio>=0.23",
     "pytest-cov>=6.0.0",  # the --cov-fail-under gate in pytest.ini needs the plugin declared (SB-04)
     "httpx>=0.28",  # for TestClient
+    "aiosqlite>=0.20",  # in-memory async SQLite for DB-backed tests
 ]
 
 [project.scripts]
@@ -72,10 +73,18 @@ python_version = "3.12"
 strict = true
 exclude = ['(^|/)tests/', '(^|/)alembic/', '(^|/)migrations/']
 
+# RestrictedPython ships source but does not explicitly re-export
+# compile_restricted / safe_globals / safe_builtins, which trips strict
+# no-implicit-reexport once it is installed. Skip following it and treat as
+# untyped (mirrors the `emails` handling pattern).
+[[tool.mypy.overrides]]
+module = ["RestrictedPython", "RestrictedPython.*"]
+follow_imports = "skip"
+ignore_missing_imports = true
+
 [[tool.mypy.overrides]]
 module = [
     "smart_llm.*",
-    "RestrictedPython.*",
     "aioimaplib.*",
     "asyncpg.*",
     "jmespath.*",

@@ -54,6 +54,31 @@ Agent nodes use the standalone **smart-llm** package: `Agent`/`AgentManager`, th
 `DatabaseKeyStore`, provider policy, and usage/budgets. The cross-service budget
 gate is the vendored `SmartLlmInvokeClient` (`shared._platform`).
 
+## Integrations (connectors)
+
+Action nodes reach external services through **connectors**. The model has three
+parts:
+
+- **Catalogue** — `GET /integrations/catalogue` returns the connector *types* the
+  engine ships (`{type, name, description, icon, category}`), loaded from
+  `backend/api/connectors.json` so new connectors are data, not code (HTTP, Web
+  Scraper, Claude, OpenAI, Slack, Notion, GitHub, Gmail, Outlook, Stripe, S3,
+  Google Drive/Sheets, PostgreSQL, Twilio, and more).
+- **Integration instances** — a tenant creates named instances of a connector
+  type: `GET /integrations` lists them, `POST /integrations`
+  (`{connector_type, name, credential_id?, config}`) creates one, and
+  `DELETE /integrations/{id}` removes it. All are org-scoped.
+- **Credentials & OAuth** — an instance may reference a stored **credential**
+  (`/credentials`, encrypted at rest: API key, OAuth token, SMTP, connection
+  string, …). OAuth connectors (Google / Microsoft) mint their credential via
+  the consent flow: `GET /oauth2/start?connector=google|microsoft` returns an
+  `auth_url`; its callback persists the token as a credential.
+
+The admin UIs' **Integrations** page renders the catalogue grouped by category,
+lists configured instances, and drives create / connect (credential or OAuth) /
+delete. At execution time a node looks up its `credential_id` and the runtime
+injects the secret, so workflow definitions never store raw secrets.
+
 ## Safety & hardening
 
 - **SSRF egress guard** (`shared/ssrf.py` → `shared._platform.ssrf`) validates

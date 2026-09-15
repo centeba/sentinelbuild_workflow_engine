@@ -18,7 +18,16 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Load the bundled English strings before the first frame so labels render.
   await Translations.instance.ensureLoaded();
-  runApp(const ProviderScope(child: ExampleApp()));
+  runApp(
+    ProviderScope(
+      // Riverpod 3 auto-retries any throwing provider forever (exponential
+      // backoff, no limit). A terminal error — e.g. a 401 when unauthenticated
+      // — would then become an unbounded request storm. Screens here refresh
+      // explicitly, so disable auto-retry and let failures surface.
+      retry: (_, __) => null,
+      child: const ExampleApp(),
+    ),
+  );
 }
 
 final _router = GoRouter(
@@ -39,6 +48,7 @@ final _router = GoRouter(
         ),
         GoRoute(path: '/rules', builder: (_, __) => const RulesScreen()),
         GoRoute(path: '/recipes', builder: (_, __) => const RecipeBuilderScreen()),
+        GoRoute(path: '/integrations', builder: (_, __) => const IntegrationsScreen()),
       ],
     ),
   ],
@@ -77,6 +87,7 @@ class _Shell extends StatelessWidget {
     ('/workflows', Icons.account_tree_outlined, 'Workflows'),
     ('/rules', Icons.rule_outlined, 'Rules'),
     ('/recipes', Icons.receipt_long_outlined, 'Recipes'),
+    ('/integrations', Icons.extension_outlined, 'Integrations'),
   ];
 
   int get _selectedIndex {

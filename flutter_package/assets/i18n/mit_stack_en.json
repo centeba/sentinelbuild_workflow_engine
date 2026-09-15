@@ -41,7 +41,8 @@
     "inactive": "Inactive",
     "request_failed": "Request failed",
     "run": "Run",
-    "untitled": "Untitled"
+    "untitled": "Untitled",
+    "retry": "Retry"
   },
   "dashboard": {
     "title": "Dashboard",
@@ -112,7 +113,28 @@
   },
   "integrations": {
     "title": "Integrations",
-    "subtitle": "Connect your tools and services"
+    "subtitle": "Connect the workflow engine to external services",
+    "your_integrations": "Your integrations",
+    "none_configured": "No integrations configured yet. Add one below.",
+    "add": "Add",
+    "cancel": "Cancel",
+    "name": "Name",
+    "no_credential": "— No credential —",
+    "config_optional": "Config (optional)",
+    "add_field": "Add field",
+    "save": "Save integration",
+    "saving": "Saving…",
+    "credential_linked": "Credential linked",
+    "authorize_oauth": "Authorize with OAuth",
+    "oauth_hint": "Open this URL to grant access, then select the new credential above.",
+    "open_consent": "Open consent screen",
+    "copy_url": "Copy URL",
+    "delete_title": "Delete integration?",
+    "delete_body": "This will remove the integration configuration.",
+    "field_key": "key",
+    "field_value": "value",
+    "create_failed": "Could not create integration",
+    "oauth_failed": "Could not start OAuth"
   },
   "credentials": {
     "title": "Credentials",

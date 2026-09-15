@@ -5,14 +5,16 @@ import { WorkflowsPage } from "./pages/WorkflowsPage";
 import { ExecutionsPage } from "./pages/ExecutionsPage";
 import { FormsPage } from "./pages/FormsPage";
 import { NodeTypesPage } from "./pages/NodeTypesPage";
+import { IntegrationsPage } from "./pages/IntegrationsPage";
 
-type Tab = "workflows" | "executions" | "forms" | "nodes";
+type Tab = "workflows" | "executions" | "forms" | "nodes" | "integrations";
 
 const TABS: { id: Tab; label: string }[] = [
   { id: "workflows", label: "Workflows" },
   { id: "executions", label: "Executions" },
   { id: "forms", label: "Forms" },
   { id: "nodes", label: "Node Types" },
+  { id: "integrations", label: "Integrations" },
 ];
 
 export function App() {
@@ -50,6 +52,7 @@ export function App() {
         {tab === "executions" && <ExecutionsPage />}
         {tab === "forms" && <FormsPage />}
         {tab === "nodes" && <NodeTypesPage />}
+        {tab === "integrations" && <IntegrationsPage />}
       </main>
     </div>
   );

@@ -38,12 +38,7 @@ library;
 
 // API clients — host overrides these to inject baseUrl + auth.
 export 'services/api_client.dart' show dioProvider;
-// The AI API client (agents/skills/tools registry) used by the workflow
-// builder's agent *nodes* to consume smart-llm. The AI agent/skill/key
-// management SCREENS were removed — that is the smart-llm package's concern
-// (it ships its own admin); the workflow engine only uses smart-llm as a
-// library for agent nodes inside workflows.
-export 'services/ai_api.dart' show aiAdminDioProvider, aiAdminApiProvider;
+
 // Embeddable multi-model chat panel — host injects its Dio clients (+ optional
 // i18n and file-picker). Used by the chassis Chat screen and domain apps.
 export 'widgets/chat/chat_api.dart' show ChatApi, PickedFile;

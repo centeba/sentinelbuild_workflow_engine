@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import '../../i18n/translate_extension.dart';
 import '../../services/api_client.dart';
 import '../../theme.dart';
-import '../../widgets/common/ai_search_bar.dart';
 
 class WorkflowsScreen extends ConsumerStatefulWidget {
   /// Vertical-app ownership filter. ``null`` (chassis default) lists only
@@ -21,7 +20,6 @@ class WorkflowsScreen extends ConsumerStatefulWidget {
 
 class _WorkflowsScreenState extends ConsumerState<WorkflowsScreen> {
   List<Map<String, dynamic>> _workflows = [];
-  List<Map<String, dynamic>>? _aiRows; // Phase H — when set, render these
   bool _loading = true;
 
   @override
@@ -133,12 +131,6 @@ class _WorkflowsScreenState extends ConsumerState<WorkflowsScreen> {
               ),
             ]),
             const SizedBox(height: 16),
-            AiSearchBar(
-              entity: 'workflows',
-              onResults: (rows) => setState(() => _aiRows = rows),
-              onClear: () => setState(() => _aiRows = null),
-            ),
-            const SizedBox(height: 8),
             Expanded(child: _buildBody()),
           ],
         ),
@@ -147,8 +139,8 @@ class _WorkflowsScreenState extends ConsumerState<WorkflowsScreen> {
   }
 
   Widget _buildBody() {
-    final list = _aiRows ?? _workflows;
-    if (_loading && _aiRows == null) {
+    final list = _workflows;
+    if (_loading) {
       return const Center(child: CircularProgressIndicator());
     }
     if (list.isEmpty) {

@@ -38,16 +38,7 @@ library;
 
 // API clients — host overrides these to inject baseUrl + auth.
 export 'services/api_client.dart' show dioProvider;
-// ``aiAdminApiProvider`` is also exported because internal Mit Stack
-// screens (workflow_builder/node_palette etc) import it through the
-// barrel to fetch the registry list. They could use a relative
-// import; keeping it in the barrel for now avoids a fan-out edit.
-export 'screens/ai_admin/ai_admin_api.dart'
-    show aiAdminDioProvider, aiAdminApiProvider;
 
-// AI agent/skill/key management is intentionally NOT surfaced here — that is
-// the smart-llm package's concern (it ships its own admin). The workflow engine
-// only consumes smart-llm for agent *nodes* inside workflows.
 // Embeddable multi-model chat panel — host injects its Dio clients (+ optional
 // i18n and file-picker). Used by the chassis Chat screen and domain apps.
 export 'widgets/chat/chat_api.dart' show ChatApi, PickedFile;

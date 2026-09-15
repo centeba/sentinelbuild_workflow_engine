@@ -13,14 +13,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mit_stack/mit_stack.dart';
-import 'package:multi_lang_sdk/multi_lang_sdk.dart';
 
-// The backend serves translations at /api/v1/translations/<namespace>; the SDK
-// appends /v1/translations/<namespace>, so the base is the API origin + /api.
-// On web the app is served same-origin (nginx proxies /api to the backend).
-String _translationsBaseUrl() => '${Uri.base.origin}/api';
-
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // Load the bundled English strings before the first frame so labels render.
+  await Translations.instance.ensureLoaded();
   runApp(const ProviderScope(child: ExampleApp()));
 }
 
@@ -59,13 +56,7 @@ class ExampleApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF0F766E)),
         useMaterial3: true,
       ),
-      // Wire the translator so `context.t('nav.workflows')` resolves against the
-      // backend's mit_stack translation namespace (else labels show raw keys).
-      localizationsDelegates: [
-        MultiLangDelegate(
-          apiClient: MultiLangApiClient(baseUrl: _translationsBaseUrl()),
-          namespace: 'mit_stack',
-        ),
+      localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,

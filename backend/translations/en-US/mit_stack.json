@@ -9,7 +9,8 @@
     "scraper": "Scraper",
     "rules": "Rules",
     "rule_flows": "Rule Flows",
-    "sign_out": "Sign out"
+    "sign_out": "Sign out",
+    "settings": "Settings"
   },
   "auth": {
     "sign_in_title": "Sign in to your account",
@@ -32,7 +33,15 @@
     "create": "Create",
     "close": "Close",
     "edit": "Edit",
-    "cannot_be_undone": "This cannot be undone."
+    "cannot_be_undone": "This cannot be undone.",
+    "activate": "Activate",
+    "active": "Active",
+    "deactivate": "Deactivate",
+    "error_prefix": "Error",
+    "inactive": "Inactive",
+    "request_failed": "Request failed",
+    "run": "Run",
+    "untitled": "Untitled"
   },
   "dashboard": {
     "title": "Dashboard",
@@ -59,7 +68,11 @@
     "tooltip_edit": "Edit",
     "tooltip_deactivate": "Deactivate",
     "tooltip_activate": "Activate",
-    "tooltip_delete": "Delete"
+    "tooltip_delete": "Delete",
+    "delete_prefix": "Delete",
+    "empty_title": "No workflows yet",
+    "execution_started": "Execution started",
+    "run_now": "Run now"
   },
   "forms": {
     "title": "Forms",
@@ -138,14 +151,244 @@
     "info_banner": "Rules are evaluated in priority order (lowest number first). Enable \"Stop on match\" to halt processing once a rule fires. Use {{field * value}} expressions in action templates for calculations.",
     "no_rules": "No rules yet",
     "create_first": "Create your first rule",
-    "delete_title": "Delete rule?"
+    "delete_title": "Delete rule?",
+    "approval_requested_prefix": "Approval requested for",
+    "approvals": "Approvals",
+    "draft": "Draft",
+    "empty_title": "No rules yet",
+    "move_to_draft": "Move to draft",
+    "moved_to_draft_suffix": "moved to draft",
+    "new_rule": "New rule",
+    "publish": "Publish",
+    "published": "Published",
+    "published_suffix": "published",
+    "request_approval": "Request approval",
+    "rule_label": "Rule",
+    "analytics": {
+      "avg": "Average",
+      "latency": "Latency",
+      "match_rate": "Match rate",
+      "max": "Max",
+      "min": "Min",
+      "no_data": "No data",
+      "no_data_yet": "No data yet",
+      "no_match": "No match",
+      "title": "Analytics",
+      "top_event_types": "Top event types",
+      "total_evaluations": "Total evaluations"
+    },
+    "audit_log": {
+      "avg_latency": "Avg latency",
+      "empty": "No audit entries yet.",
+      "match_rate": "Match rate",
+      "title": "Audit log",
+      "top_events": "Top events",
+      "total": "Total"
+    },
+    "editor": {
+      "actions": {
+        "action_count_suffix": "actions",
+        "add_action": "Add action",
+        "add_else_action": "Add else action",
+        "else_hint": "Actions to run when the conditions do not match.",
+        "if_match_then": "If matched, then",
+        "otherwise_else": "Otherwise (else)",
+        "then_hint": "Actions to run when the conditions match."
+      },
+      "ai_generate": "Generate with AI",
+      "ai_generate_tooltip": "Describe the rule and let AI draft it.",
+      "basics": {
+        "active": "Active",
+        "active_hint": "Only active rules are evaluated.",
+        "approval_workflow": "Approval workflow",
+        "behaviour": "Behaviour",
+        "condition_tree": "Condition tree",
+        "condition_tree_subtitle": "Build conditions with AND/OR groups.",
+        "decision_table": "Decision table",
+        "decision_table_subtitle": "Match inputs to outputs in a table.",
+        "description": "Description",
+        "description_hint": "What does this rule do?",
+        "draft": "Draft",
+        "draft_subtitle": "Not evaluated until published.",
+        "javascript": "JavaScript",
+        "javascript_subtitle": "Write custom logic in a sandboxed script.",
+        "name": "Name",
+        "name_hint": "Rule name",
+        "priority": "Priority",
+        "priority_hint": "Lower numbers are evaluated first.",
+        "published": "Published",
+        "published_subtitle": "Live and evaluated on matching events.",
+        "require_approval": "Require approval",
+        "require_approval_hint": "Changes must be approved before publishing.",
+        "required_approvers": "Required approvers",
+        "required_approvers_hint": "Number of approvals needed.",
+        "rule_details": "Rule details",
+        "rule_type": "Rule type",
+        "status": "Status",
+        "stop_on_match": "Stop on match",
+        "stop_on_match_hint": "Stop evaluating further rules once this one matches."
+      },
+      "change_note_hint": "Add a note describing this change (optional).",
+      "conditions": {
+        "add_condition": "Add condition",
+        "add_group": "Add group",
+        "empty_matches": "No conditions - this rule matches every event.",
+        "of_these_met": "of these conditions are met",
+        "when": "When"
+      },
+      "decision_table": {
+        "add": "Add",
+        "add_row": "Add row",
+        "annotation": "Annotation",
+        "empty_help": "Add input and output columns, then add rows.",
+        "hit_policy": "Hit policy",
+        "input": "Input",
+        "input_columns": "Input columns",
+        "label": "Label",
+        "output": "Output",
+        "output_columns": "Output columns",
+        "rows": "Rows"
+      },
+      "dt_no_actions": "Decision tables produce outputs, not actions.",
+      "dt_outputs_in_table": "Outputs are defined in the table.",
+      "edit_prefix": "Edit rule",
+      "generate_rule": "Generate rule",
+      "generating": "Generating...",
+      "js_code": {
+        "check_syntax": "Check syntax",
+        "checking": "Checking...",
+        "help": "Return true to match. The event is available as event.",
+        "quick_reference": "Quick reference",
+        "syntax_ok": "Syntax OK",
+        "title": "JavaScript"
+      },
+      "new_title": "New rule",
+      "save_rule": "Save rule",
+      "tab_actions": "Actions",
+      "tab_basics": "Basics",
+      "tab_conditions": "Conditions",
+      "tab_decision_table": "Decision table",
+      "tab_na": "-",
+      "tab_script": "Script",
+      "tab_triggers": "Triggers",
+      "triggers": {
+        "add_filter": "Add filter",
+        "filter": "Filter",
+        "filter_hint": "Only evaluate events matching these filters.",
+        "filter_key_hint": "Field",
+        "filter_value_hint": "Value",
+        "when_to_evaluate": "When to evaluate",
+        "when_to_evaluate_hint": "Choose which events trigger this rule."
+      }
+    },
+    "pending_approvals": {
+      "approve": "Approve",
+      "approved_msg": "Approved",
+      "approved_suffix": "approved",
+      "approvers": "Approvers",
+      "close": "Close",
+      "empty": "No pending approvals.",
+      "error_prefix": "Error",
+      "reject": "Reject",
+      "rejected_msg": "Rejected",
+      "requested_by": "Requested by",
+      "rule_fallback": "Untitled rule",
+      "title": "Pending approvals"
+    },
+    "test": {
+      "batch_results": "Batch results",
+      "dry_run_hint": "Evaluate without running actions.",
+      "dry_run_label": "Dry run",
+      "event_data_json": "Event data (JSON)",
+      "event_type": "Event type",
+      "live_run_hint": "Evaluate and run matching actions.",
+      "live_run_label": "Live run",
+      "matched_rules": "Matched rules",
+      "records_json": "Records (JSON)",
+      "records_suffix": "records",
+      "results": "Results",
+      "rules_matched_suffix": "rules matched",
+      "run_batch_dry": "Run batch (dry)",
+      "run_batch_live": "Run batch (live)",
+      "run_test": "Run test",
+      "tab_batch": "Batch",
+      "tab_single": "Single",
+      "title": "Test rule"
+    },
+    "version_history": {
+      "actions_suffix": "actions",
+      "empty": "No previous versions.",
+      "error_prefix": "Error",
+      "restore": "Restore",
+      "restored_to": "Restored to version",
+      "saved_prefix": "Saved",
+      "title": "Version history"
+    }
   },
   "rule_flows": {
     "title": "Rule Flows",
-    "subtitle": "Chain rules into ordered pipelines \u2014 each step passes its output to the next",
+    "subtitle": "Chain rules into ordered pipelines — each step passes its output to the next",
     "btn_new_flow": "New Flow",
     "no_flows": "No rule flows yet",
     "create_first": "Create your first flow",
     "delete_title": "Delete flow?"
+  },
+  "agent_node": {
+    "attached_skills": "Attached skills",
+    "could_not_load_helper": "Could not load agents. Check the AI service connection.",
+    "id_label": "Agent",
+    "label": "Agent",
+    "no_skills": "No skills attached",
+    "no_system_prompt": "No system prompt set",
+    "select_hint": "Select an agent",
+    "system_prompt_prefix": "System prompt"
+  },
+  "ai_admin": {
+    "field": {
+      "name": "Name"
+    }
+  },
+  "mit_settings": {
+    "categories_help": "Categories help you organize automations and rules.",
+    "color_optional": "Color (optional)",
+    "delete_category_prefix": "Delete",
+    "delete_category_title": "Delete category",
+    "delete_category_warning": "This action cannot be undone.",
+    "edit_category": "Edit category",
+    "new_category": "New category",
+    "no_categories": "No categories yet.",
+    "scope": "Scope",
+    "scope_company": "Company",
+    "scope_helper": "Who can use this category.",
+    "scope_system": "System",
+    "scope_user": "Only me",
+    "subtitle": "Manage automation categories and workspace preferences.",
+    "tab_automation_category": "Automation categories"
+  },
+  "node_palette": {
+    "failed_load_tools": "Failed to load tools",
+    "group": {
+      "tools": "Tools"
+    },
+    "no_active_skills": "No active skills",
+    "title": "Nodes"
+  },
+  "workflow_builder": {
+    "clear_pinned": "Clear pinned outputs",
+    "export_prefix": "Export",
+    "export_workflow": "Export workflow",
+    "import_button": "Import",
+    "import_dialog_title": "Import workflow",
+    "import_failed_prefix": "Import failed",
+    "import_workflow": "Import workflow",
+    "imported_prefix": "Imported",
+    "invalid_format": "Invalid workflow format.",
+    "invalid_json": "Invalid JSON.",
+    "no_previous_run": "No previous run to load.",
+    "paste_export_json": "Paste exported workflow JSON below.",
+    "pin_last_outputs": "Pin last run outputs",
+    "pinned_output": "Pinned output",
+    "save_before_export": "Save the workflow before exporting.",
+    "saved": "Workflow saved"
   }
 }

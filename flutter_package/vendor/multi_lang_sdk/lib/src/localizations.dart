@@ -20,7 +20,10 @@ class MultiLangLocalizations {
         return key; // Return the key if translation is missing
       }
     }
-    
-    return current?.toString() ?? key;
+
+    // Only leaf string values are translations. When a key resolves to a nested
+    // map (a namespace also used as a leaf label elsewhere), return the key so
+    // the caller's fallback (humanize) applies instead of a "{...}" dump.
+    return current is String ? current : key;
   }
 }

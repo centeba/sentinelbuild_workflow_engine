@@ -12,6 +12,10 @@ class Settings(BaseSettings):
     app_name: str = "Mit Stack"
     environment: str = "development"
     debug: bool = False
+    # LOCAL DEV ONLY: when true (and not production), the API skips JWT auth and
+    # acts as a seeded "dev" org/user. Lets the token-less Flutter example call
+    # the API. Ignored in production. Never enable outside local development.
+    dev_auth_bypass: bool = False
 
     # ── Database ───────────────────────────────────────────────────────────────
     # Set DATABASE_URL in .env for all environments.

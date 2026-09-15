@@ -1,5 +1,6 @@
 from .credential import Credential
 from .execution import NodeExecution, WorkflowExecution
+from .form import Form
 from .integration import Integration
 from .organization import Organization
 from .pack_node_type import PackNodeType
@@ -15,6 +16,7 @@ from .workflow_version import WorkflowVersion
 
 __all__ = [
     "Credential",
+    "Form",
     "Integration",
     "NodeExecution",
     "Organization",

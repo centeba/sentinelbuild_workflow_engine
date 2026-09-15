@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { getToken, clearToken } from "./api";
+import { LoginPage } from "./pages/LoginPage";
 import { WorkflowsPage } from "./pages/WorkflowsPage";
 import { ExecutionsPage } from "./pages/ExecutionsPage";
 import { NodeTypesPage } from "./pages/NodeTypesPage";
@@ -12,7 +14,16 @@ const TABS: { id: Tab; label: string }[] = [
 ];
 
 export function App() {
+  const [authed, setAuthed] = useState<boolean>(() => getToken() !== null);
   const [tab, setTab] = useState<Tab>("workflows");
+
+  if (!authed) return <LoginPage onAuthed={() => setAuthed(true)} />;
+
+  function logout() {
+    clearToken();
+    setAuthed(false);
+  }
+
   return (
     <div className="app">
       <header className="topbar">
@@ -28,6 +39,9 @@ export function App() {
             </button>
           ))}
         </nav>
+        <button className="ghost logout" onClick={logout}>
+          Sign out
+        </button>
       </header>
       <main className="content">
         {tab === "workflows" && <WorkflowsPage />}

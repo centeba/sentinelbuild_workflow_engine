@@ -16,14 +16,34 @@ export class ApiError extends Error {
   }
 }
 
+const TOKEN_KEY = "we_token";
+
+export function getToken(): string | null {
+  try {
+    return localStorage.getItem(TOKEN_KEY);
+  } catch {
+    return null;
+  }
+}
+export function setToken(token: string): void {
+  try {
+    localStorage.setItem(TOKEN_KEY, token);
+  } catch {
+    /* ignore */
+  }
+}
+export function clearToken(): void {
+  try {
+    localStorage.removeItem(TOKEN_KEY);
+  } catch {
+    /* ignore */
+  }
+}
+
 function authHeaders(): Record<string, string> {
   const h: Record<string, string> = {};
-  try {
-    const token = localStorage.getItem("we_token");
-    if (token) h["Authorization"] = `Bearer ${token}`;
-  } catch {
-    /* localStorage unavailable */
-  }
+  const token = getToken();
+  if (token) h["Authorization"] = `Bearer ${token}`;
   return h;
 }
 
@@ -120,9 +140,44 @@ export interface NodeRegistry {
 
 // ── Endpoints ───────────────────────────────────────────────────────────────
 
+export interface TokenResponse {
+  access_token: string;
+  refresh_token: string;
+  token_type: string;
+}
+
+export interface RegisterInput {
+  org_name: string;
+  org_slug: string;
+  email: string;
+  password: string;
+}
+
+export const auth = {
+  login: (email: string, password: string) =>
+    request<TokenResponse>("POST", "/auth/login", { email, password }),
+  register: (data: RegisterInput) =>
+    request<TokenResponse>("POST", "/auth/register", data),
+};
+
+export interface NewWorkflow {
+  name: string;
+  description?: string;
+  trigger_type: string;
+  definition?: WorkflowDefinition;
+  trigger_config?: Record<string, unknown>;
+}
+
 export const api = {
   workflows: () => request<Workflow[]>("GET", "/workflows"),
   workflow: (id: string) => request<Workflow>("GET", `/workflows/${id}`),
+  createWorkflow: (data: NewWorkflow) =>
+    request<Workflow>("POST", "/workflows", {
+      definition: { nodes: [], edges: [] },
+      trigger_config: {},
+      ...data,
+    }),
+  deleteWorkflow: (id: string) => request<void>("DELETE", `/workflows/${id}`),
   executeWorkflow: (id: string) =>
     request<{ execution_id?: string; [k: string]: unknown }>(
       "POST",

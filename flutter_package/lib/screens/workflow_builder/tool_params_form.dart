@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mit_stack/mit_stack.dart' show aiAdminApiProvider;
+import '../../services/ai_api.dart' show aiAdminApiProvider;
 import '../../theme.dart';
 
 /// Renders typed input fields driven by a tool's ``params_schema``.

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mit_stack/mit_stack.dart' show aiAdminApiProvider;
+import '../../services/ai_api.dart' show aiAdminApiProvider;
 import '../../i18n/translate_extension.dart';
 import '../../widgets/canvas/node_widget.dart';
 import '../../theme.dart';

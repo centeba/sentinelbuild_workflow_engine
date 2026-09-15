@@ -21,6 +21,23 @@ import 'package:multi_lang_sdk/multi_lang_sdk.dart';
 extension TranslateExtension on BuildContext {
   /// Look up a dot-namespaced translation key against the active
   /// ``MultiLangLocalizations``.
-  String t(String key) =>
-      MultiLangLocalizations.of(this)?.translate(key) ?? key;
+  ///
+  /// A registered translation returns readable text; a miss returns the key
+  /// itself. Translation catalogs can be incomplete, so on a miss we humanize
+  /// the key's last segment (``snake_case`` → "Sentence case") rather than
+  /// leaking raw dot-keys like ``workflow_builder.export_workflow`` into the UI.
+  String t(String key) {
+    final value = MultiLangLocalizations.of(this)?.translate(key);
+    if (value != null && value != key) return value;
+    return _humanizeKey(key);
+  }
+}
+
+String _humanizeKey(String key) {
+  final segment = key.split('.').last.trim();
+  // Interpolation placeholders (``$foo``) and empty segments aren't labels.
+  if (segment.isEmpty || segment.startsWith(r'$')) return key;
+  final words = segment.replaceAll('_', ' ').trim();
+  if (words.isEmpty) return key;
+  return '${words[0].toUpperCase()}${words.substring(1)}';
 }

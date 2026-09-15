@@ -199,7 +199,7 @@ packages:
     source: sdk
     version: "0.0.0"
   flutter_localizations:
-    dependency: transitive
+    dependency: "direct main"
     description: flutter
     source: sdk
     version: "0.0.0"
@@ -468,7 +468,7 @@ packages:
     source: path
     version: "0.1.0"
   multi_lang_sdk:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: "../vendor/multi_lang_sdk"
       relative: true

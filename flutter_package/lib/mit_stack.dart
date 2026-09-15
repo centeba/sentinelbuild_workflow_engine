@@ -58,3 +58,4 @@ export 'screens/workflow_builder/workflow_builder_screen.dart'
 export 'screens/workflows/workflows_screen.dart' show WorkflowsScreen;
 export 'screens/recipe_builder/recipe_builder_screen.dart'
     show RecipeBuilderScreen;
+export 'screens/integrations/integrations_screen.dart' show IntegrationsScreen;

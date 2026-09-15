@@ -195,3 +195,15 @@ button.danger:hover:not(:disabled) { background: var(--bad-weak); }
   border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; margin-top: 4px;
 }
 .req-star { color: var(--bad); }
+
+/* Integrations */
+.int-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; margin-top: 10px; }
+.int-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px; display: flex; flex-direction: column; gap: 8px; }
+.int-head { display: flex; align-items: center; gap: 10px; }
+.int-icon { font-size: 22px; line-height: 1; }
+.int-name { font-weight: 600; }
+.int-desc { color: var(--muted); font-size: 13px; flex: 1; }
+.int-add { display: flex; flex-direction: column; gap: 8px; border-top: 1px solid var(--border); padding-top: 10px; }
+.int-add input, .int-add select { font: inherit; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 7px 10px; width: 100%; }
+.kvrow { display: grid; grid-template-columns: 1fr 1fr auto; gap: 6px; align-items: center; }
+.oauth-url { width: 100%; font: 12px/1.4 ui-monospace, Menlo, monospace; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 8px; word-break: break-all; }

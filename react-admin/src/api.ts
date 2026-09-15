@@ -208,6 +208,43 @@ export interface FormInput {
   is_active?: boolean;
 }
 
+// ── Integrations / connectors ────────────────────────────────────────────────
+
+/** A connector type from the built-in catalogue (connectors.json). */
+export interface ConnectorCatalogueEntry {
+  type: string;
+  name: string;
+  description: string;
+  icon: string;
+  category: string;
+}
+
+/** A configured integration instance for the org. */
+export interface Integration {
+  id: string;
+  org_id: string;
+  connector_type: string;
+  name: string;
+  credential_id: string | null;
+  config: Record<string, unknown>;
+}
+
+export interface NewIntegration {
+  connector_type: string;
+  name: string;
+  credential_id?: string | null;
+  config?: Record<string, unknown>;
+}
+
+/** A stored credential (secrets never returned). */
+export interface Credential {
+  id: string;
+  org_id: string;
+  name: string;
+  type: string;
+  created_at: string;
+}
+
 export const api = {
   workflows: () => request<Workflow[]>("GET", "/workflows"),
   workflow: (id: string) => request<Workflow>("GET", `/workflows/${id}`),
@@ -240,4 +277,20 @@ export const api = {
   updateForm: (id: string, data: Partial<FormInput>) =>
     request<FormDef>("PUT", `/forms/${id}`, data),
   deleteForm: (id: string) => request<void>("DELETE", `/forms/${id}`),
+
+  connectorCatalogue: () =>
+    request<ConnectorCatalogueEntry[]>("GET", "/integrations/catalogue"),
+  integrations: () => request<Integration[]>("GET", "/integrations"),
+  createIntegration: (data: NewIntegration) =>
+    request<Integration>("POST", "/integrations", data),
+  deleteIntegration: (id: string) =>
+    request<void>("DELETE", `/integrations/${id}`),
+
+  credentials: () => request<Credential[]>("GET", "/credentials"),
+  // OAuth2 connect for google/microsoft; returns a consent URL to open.
+  oauth2Start: (connector: string, name: string) =>
+    request<{ auth_url: string }>(
+      "GET",
+      `/oauth2/start?connector=${encodeURIComponent(connector)}&name=${encodeURIComponent(name)}`,
+    ),
 };

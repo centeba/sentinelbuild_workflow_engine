@@ -9,6 +9,12 @@
 # packages, and plugins designed to encourage good coding practices.
 include: package:flutter_lints/flutter.yaml
 
+analyzer:
+  # Vendored sibling packages carry their own quality bar and are not gated by
+  # this package's lints (they live under vendor/ to keep this repo standalone).
+  exclude:
+    - vendor/**
+
 linter:
   # The lint rules applied to this project can be customized in the
   # section below to disable rules from the `package:flutter_lints/flutter.yaml`

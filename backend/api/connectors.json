@@ -1,0 +1,142 @@
+[
+  {
+    "type": "http",
+    "name": "HTTP Request",
+    "description": "Make any HTTP/REST/GraphQL request",
+    "icon": "🌐",
+    "category": "Core"
+  },
+  {
+    "type": "web_scraper",
+    "name": "Web Scraper",
+    "description": "Scrape data from websites (Playwright)",
+    "icon": "🕷️",
+    "category": "Core"
+  },
+  {
+    "type": "claude_llm",
+    "name": "Claude (Anthropic)",
+    "description": "Chat completions via Claude Sonnet / Opus / Haiku",
+    "icon": "🤖",
+    "category": "AI"
+  },
+  {
+    "type": "openai",
+    "name": "OpenAI",
+    "description": "Chat completions, embeddings (GPT-4o, etc.)",
+    "icon": "🧠",
+    "category": "AI"
+  },
+  {
+    "type": "smtp",
+    "name": "SMTP Email",
+    "description": "Send email via any SMTP server",
+    "icon": "✉️",
+    "category": "Email"
+  },
+  {
+    "type": "gmail",
+    "name": "Gmail",
+    "description": "Send and read email via Gmail API (OAuth2)",
+    "icon": "📬",
+    "category": "Email"
+  },
+  {
+    "type": "outlook",
+    "name": "Outlook / Microsoft 365",
+    "description": "Send and read email via Microsoft Graph (OAuth2)",
+    "icon": "📧",
+    "category": "Email"
+  },
+  {
+    "type": "sendgrid",
+    "name": "SendGrid",
+    "description": "Send transactional email at scale",
+    "icon": "📨",
+    "category": "Email"
+  },
+  {
+    "type": "s3",
+    "name": "AWS S3",
+    "description": "Upload, download, list and delete S3 objects",
+    "icon": "🪣",
+    "category": "Storage"
+  },
+  {
+    "type": "google_drive",
+    "name": "Google Drive",
+    "description": "Upload, download, list Drive files (OAuth2)",
+    "icon": "📁",
+    "category": "Storage"
+  },
+  {
+    "type": "excel",
+    "name": "Excel",
+    "description": "Read and write .xlsx spreadsheets",
+    "icon": "📊",
+    "category": "Data"
+  },
+  {
+    "type": "google_sheets",
+    "name": "Google Sheets",
+    "description": "Read/write rows (OAuth2)",
+    "icon": "🗂️",
+    "category": "Data"
+  },
+  {
+    "type": "postgresql",
+    "name": "PostgreSQL",
+    "description": "Query your databases directly",
+    "icon": "🐘",
+    "category": "Data"
+  },
+  {
+    "type": "mailchimp",
+    "name": "Mailchimp",
+    "description": "Subscribe/update list members, manage tags",
+    "icon": "🐵",
+    "category": "Marketing"
+  },
+  {
+    "type": "stripe",
+    "name": "Stripe",
+    "description": "Charges, customers, invoices, payment intents",
+    "icon": "💳",
+    "category": "Payments"
+  },
+  {
+    "type": "slack",
+    "name": "Slack",
+    "description": "Send messages, post to channels",
+    "icon": "💬",
+    "category": "Collaboration"
+  },
+  {
+    "type": "notion",
+    "name": "Notion",
+    "description": "Create pages, update databases",
+    "icon": "📝",
+    "category": "Collaboration"
+  },
+  {
+    "type": "github",
+    "name": "GitHub",
+    "description": "Create issues, list PRs, trigger workflows",
+    "icon": "🐙",
+    "category": "Collaboration"
+  },
+  {
+    "type": "airtable",
+    "name": "Airtable",
+    "description": "Create/update records",
+    "icon": "🗃️",
+    "category": "Collaboration"
+  },
+  {
+    "type": "twilio",
+    "name": "Twilio",
+    "description": "Send SMS messages",
+    "icon": "📱",
+    "category": "Messaging"
+  }
+]

@@ -1,0 +1,74 @@
+name: mit_stack
+description: "Mit Stack — embeddable workflow automation platform. Add as a package dependency to embed the full workflow builder, form builder, and execution monitor into any Flutter app."
+# Set to 'none' for internal/private use, or remove to publish to pub.dev
+publish_to: none
+version: 0.1.0
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  multi_lang_sdk:
+    path: ./vendor/multi_lang_sdk
+
+  # Shared design system — mit_stack re-exports AppTheme/ThemeBrand from
+  # here (lib/theme.dart). Vendored under vendor/ to keep this repo standalone.
+  sentinel_branding:
+    path: ./vendor/sentinel_branding
+
+  # State management
+  flutter_riverpod: ^3.3.1
+  riverpod_annotation: ^4.0.2
+
+  # Navigation
+  go_router: ^17.1.0
+
+  # HTTP client
+  dio: ^5.9.2
+  web_socket_channel: ^3.0.3
+
+  # UI
+  flutter_svg: ^2.2.4
+  google_fonts: ^8.0.2
+  gap: ^3.0.1
+  shimmer: ^3.0.0
+
+  # Drag and drop (workflow canvas)
+  dotted_border: ^3.1.0
+
+  # Icons
+  lucide_icons:
+    path: ./vendor/lucide_icons  # vendored: upstream abandoned + breaks on Dart 3.8 (final IconData)
+
+  # Storage (JWT tokens; non-sensitive local prefs)
+  flutter_secure_storage: ^10.0.0
+  shared_preferences: ^2.3.0
+
+  # Utils
+  intl: ^0.20.2
+  uuid: ^4.5.3
+  equatable: ^2.0.8
+  freezed_annotation: ^3.1.0
+  json_annotation: ^4.11.0
+
+  # form_builder lives in the shared web_builder_renderer package; mit_stack
+  # re-exports the screen + models from there. Vendored under vendor/.
+  web_builder_renderer:
+    path: ./vendor/web_builder_renderer
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  build_runner: ^2.13.1
+  riverpod_generator: ^4.0.3
+  freezed: ^3.2.5
+  json_serializable: ^6.8.0
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true

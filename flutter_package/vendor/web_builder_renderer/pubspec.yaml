@@ -1,0 +1,53 @@
+name: web_builder_renderer
+description: Runtime renderer for web_builder PageDefinition JSON. Embeddable in any Flutter app.
+version: 0.1.0
+publish_to: none
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # State
+  flutter_riverpod: ^3.3.1
+
+  # HTTP
+  dio: ^5.9.2
+
+  # WebSockets (Phase 8 / Phase 5.1 — BusWebSocketAdapter consumes the
+  # platform's subscription bus. Browser-safe via the channel's
+  # html-package fallback).
+  web_socket_channel: ^3.0.3
+
+  # Charts
+  fl_chart: ^0.71.0
+
+  # UI
+  google_fonts: ^8.0.2
+  lucide_icons:
+    path: ../lucide_icons  # vendored: upstream abandoned + breaks on Dart 3.8 (final IconData)
+  gap: ^3.0.1
+  shimmer: ^3.0.0
+  dotted_border: ^3.1.0
+
+  # Persistence (only used by SentinelBuild settings; harmless on platforms without it)
+  shared_preferences: ^2.3.4
+
+  # File picker — used by the `fileUpload` element when an
+  # `uploadEndpoint` is configured. Supports web + mobile + desktop.
+  file_picker: ^8.1.4
+
+  # Utils
+  intl: ^0.20.2
+  collection: ^1.19.1
+  uuid: ^4.5.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true

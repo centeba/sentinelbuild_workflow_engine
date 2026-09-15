@@ -1,0 +1,29 @@
+name: lucide_icons
+# VENDORED COPY of lucide_icons 0.257.0 (pub.dev), patched for Dart 3.8+.
+# Upstream is unmaintained (last published 2023) and its `LucideIconData`
+# subclassed `IconData`, which became a `final` class in modern Flutter
+# ("can't be extended outside of its library"). The icon map in
+# lib/lucide_icons.dart now uses plain `const IconData(...)` with the same
+# font ('Lucide') + codepoints, so the rendered glyphs are byte-identical to
+# upstream and every `LucideIcons.x` call site is unchanged. Consumers depend
+# on this via a path dependency. Replace with a maintained package if/when one
+# with a compatible API + icon names is adopted.
+description: Vendored, Dart-3.8-compatible copy of lucide_icons 0.257.0.
+version: 0.257.0
+homepage: https://lucide.dev
+repository: https://github.com/lucide-icons/lucide
+publish_to: none
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+flutter:
+  fonts:
+    - family: Lucide
+      fonts:
+        - asset: assets/lucide.ttf

@@ -1,0 +1,37 @@
+# Standalone API image for the workflow engine. Build context: this backend/
+# directory. smart-llm is pulled from its public git ref (see requirements.txt),
+# so no sibling packages are copied in.
+#
+# Digest-pinned. Bump the tag+digest together; a bot (Dependabot/Renovate)
+# should keep it fresh.
+FROM python:3.12-slim@sha256:09f7da3bc104798d0afb40bc08d23ab2da20a76130cec1f2ef170848f5d85217
+
+WORKDIR /app
+
+# System deps. `git` is required to install the smart-llm git dependency.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc \
+    libpq-dev \
+    git \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install dependencies first (layer caching). requirements.txt pins smart-llm to
+# a public git ref plus the rest of the runtime deps.
+COPY requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir -r /app/requirements.txt
+
+# App source.
+COPY . /app
+
+RUN chmod +x docker-entrypoint.sh
+ENTRYPOINT ["/app/docker-entrypoint.sh"]
+
+# Run as a non-root user (shrinks RCE blast radius).
+RUN useradd --system --no-create-home --uid 10001 appuser \
+    && chown -R appuser:appuser /app
+USER appuser
+
+EXPOSE 8000
+# Shell form so ${PORT:-8000} expands at container start, not build time.
+CMD uvicorn api.main:app --host 0.0.0.0 --port ${PORT:-8000}

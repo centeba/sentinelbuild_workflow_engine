@@ -1,0 +1,67 @@
+# Web framework
+fastapi==0.136.0
+uvicorn[standard]==0.45.0
+
+# Database
+sqlalchemy[asyncio]==2.0.49
+asyncpg==0.31.0
+alembic==1.18.4
+
+# Redis
+redis[asyncio]==7.4.0
+
+# Temporal
+temporalio==1.26.0
+
+# Authentication
+PyJWT>=2.13.0
+# passlib removed (SEC H8) — unmaintained and unused; auth_service.py calls
+# bcrypt directly (see its comment). It was a dead deployed dependency.
+python-multipart==0.0.32  # SEC H8 — was 0.0.26 (CVE cluster: DoS / param smuggling)
+
+# Encryption
+cryptography==49.0.0  # SEC H8 — was 46.0.7 (vulnerable OpenSSL in wheel); matches platform-wide resolve
+
+# HTTP client (for HTTP activity)
+httpx==0.28.1
+
+# Scraping
+playwright==1.58.0
+
+# TOTP (MFA) code generation for authenticated scraper logins
+pyotp==2.9.0
+
+# Data transformation
+jmespath==1.1.0
+jsonpath-ng==1.8.0
+
+# Code sandbox
+RestrictedPython==8.1
+
+# Email (send + receive)
+aiosmtplib==5.1.2  # SEC H8 — was 5.1.0 (CVE-2026-53533 SMTP CRLF injection)
+aioimaplib==2.0.1
+mail-parser==4.1.4
+
+# AWS S3
+boto3==1.42.93
+
+# Excel
+openpyxl==3.1.5
+
+# JavaScript sandbox (Gap 11: scripted rules)
+dukpy==0.6.0  # SEC H8 — was 0.3.1 (JS-eval engine, keep current)
+
+# LLM abstraction layer (multi-provider: Anthropic, OpenAI, Gemini + failover).
+# Pinned to a public commit of the standalone smart-llm repo; bump the ref to
+# pull upstream fixes (see README "Updating smart-llm"). Requires `git` in the
+# build image.
+smart-llm[db,observability] @ git+https://github.com/centeba/smart-llm@ad295adca2fb44f0a49e91883942f1778bb2d789
+
+# Utils
+python-dotenv==1.2.2  # SEC H8 — was 1.0.0 (CVE-2026-28684 symlink file overwrite)
+pydantic[email]==2.13.3
+pydantic-settings==2.14.2  # SEC H8 — was 2.14.0 (CVE-2026-58203 symlink file read)
+orjson==3.11.8
+structlog==25.1.0
+bcrypt>=4.0

@@ -20,7 +20,7 @@ PyJWT>=2.13.0
 python-multipart==0.0.32  # SEC H8 — was 0.0.26 (CVE cluster: DoS / param smuggling)
 
 # Encryption
-cryptography==49.0.0  # SEC H8 — was 46.0.7 (vulnerable OpenSSL in wheel); matches platform-wide resolve
+cryptography==50.0.0  # SEC H8 — was 46.0.7 (vulnerable OpenSSL in wheel); matches platform-wide resolve
 
 # HTTP client (for HTTP activity)
 httpx==0.28.1
@@ -36,7 +36,7 @@ jmespath==1.1.0
 jsonpath-ng==1.8.0
 
 # Code sandbox
-RestrictedPython==8.1
+RestrictedPython==8.3a1.dev0
 
 # Email (send + receive)
 aiosmtplib==5.1.2  # SEC H8 — was 5.1.0 (CVE-2026-53533 SMTP CRLF injection)

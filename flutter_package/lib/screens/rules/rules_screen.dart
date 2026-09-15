@@ -5,7 +5,6 @@ import '../../i18n/translate_extension.dart';
 import '../../services/api_client.dart';
 import '../../theme.dart';
 import '../../constants.dart';
-import '../../widgets/common/ai_search_bar.dart';
 import '../workflow_builder/node_type_registry.dart';
 import '../workflow_builder/schema_condition_builder.dart';
 
@@ -20,7 +19,6 @@ class RulesScreen extends ConsumerStatefulWidget {
 
 class _RulesScreenState extends ConsumerState<RulesScreen> {
   List<Map<String, dynamic>> _rules = [];
-  List<Map<String, dynamic>>? _aiRows; // Phase H — when set, render these
   bool _loading = true;
   String _statusFilter = 'all'; // 'all' | 'draft' | 'published'
 
@@ -264,12 +262,6 @@ class _RulesScreenState extends ConsumerState<RulesScreen> {
             ]),
           ),
           const SizedBox(height: 16),
-          AiSearchBar(
-            entity: 'rules',
-            onResults: (rows) => setState(() => _aiRows = rows),
-            onClear: () => setState(() => _aiRows = null),
-          ),
-          const SizedBox(height: 8),
           Expanded(child: _buildRulesBody()),
         ]),
       ),
@@ -277,8 +269,8 @@ class _RulesScreenState extends ConsumerState<RulesScreen> {
   }
 
   Widget _buildRulesBody() {
-    final list = _aiRows ?? _rules;
-    if (_loading && _aiRows == null) {
+    final list = _rules;
+    if (_loading) {
       return const Center(child: CircularProgressIndicator());
     }
     if (list.isEmpty) {

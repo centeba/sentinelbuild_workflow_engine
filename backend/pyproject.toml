@@ -73,12 +73,12 @@ python_version = "3.12"
 strict = true
 exclude = ['(^|/)tests/', '(^|/)alembic/', '(^|/)migrations/']
 
-# RestrictedPython ships source but does not explicitly re-export
-# compile_restricted / safe_globals / safe_builtins, which trips strict
-# no-implicit-reexport once it is installed. Skip following it and treat as
-# untyped (mirrors the `emails` handling pattern).
+# RestrictedPython and jsonpath_ng (typed since 1.9) ship source but do not
+# explicitly re-export compile_restricted / safe_globals / parse, which trips
+# strict no-implicit-reexport once installed. Skip following them and treat
+# as untyped (mirrors the `emails` handling pattern).
 [[tool.mypy.overrides]]
-module = ["RestrictedPython", "RestrictedPython.*"]
+module = ["RestrictedPython", "RestrictedPython.*", "jsonpath_ng", "jsonpath_ng.*"]
 follow_imports = "skip"
 ignore_missing_imports = true
 
@@ -88,7 +88,6 @@ module = [
     "aioimaplib.*",
     "asyncpg.*",
     "jmespath.*",
-    "jsonpath_ng.*",
     "dukpy.*",
     "mailparser.*",
 ]

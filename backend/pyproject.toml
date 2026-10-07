@@ -15,7 +15,7 @@ dependencies = [
     # smart-llm provides the agentic LLM layer, key store, observability +
     # service-runtime rails. Pinned to a public commit; bump the ref to pull
     # upstream fixes (see README "Updating smart-llm").
-    "smart-llm[db,observability] @ git+https://github.com/centeba/smart-llm@a1dbed6eeffff7f6425586b407081823db63f1c2",
+    "smart-llm[db,observability] @ git+https://github.com/centeba/smart-llm@ea1f34f56d70d1b2cf6a9e4f6de9c1a88b9448aa",
     "fastapi>=0.136.0,<0.137.0",
     "uvicorn[standard]>=0.45.0",
     "sqlalchemy[asyncio]>=2.0.49",
@@ -73,12 +73,12 @@ python_version = "3.12"
 strict = true
 exclude = ['(^|/)tests/', '(^|/)alembic/', '(^|/)migrations/']
 
-# RestrictedPython ships source but does not explicitly re-export
-# compile_restricted / safe_globals / safe_builtins, which trips strict
-# no-implicit-reexport once it is installed. Skip following it and treat as
-# untyped (mirrors the `emails` handling pattern).
+# RestrictedPython and jsonpath_ng (typed since 1.9) ship source but do not
+# explicitly re-export compile_restricted / safe_globals / parse, which trips
+# strict no-implicit-reexport once installed. Skip following them and treat
+# as untyped (mirrors the `emails` handling pattern).
 [[tool.mypy.overrides]]
-module = ["RestrictedPython", "RestrictedPython.*"]
+module = ["RestrictedPython", "RestrictedPython.*", "jsonpath_ng", "jsonpath_ng.*"]
 follow_imports = "skip"
 ignore_missing_imports = true
 
@@ -88,7 +88,6 @@ module = [
     "aioimaplib.*",
     "asyncpg.*",
     "jmespath.*",
-    "jsonpath_ng.*",
     "dukpy.*",
     "mailparser.*",
 ]

@@ -99,11 +99,15 @@ async def dispatch_pack_action(params: PackActionParams) -> dict[str, Any]:
     url = f"{base}/api/{pack_name}/v1{endpoint_path}"
 
     # Body = the node's config minus node_key (which only identifies
-    # which spec to dispatch). Plus org_id so the pack endpoint can
-    # scope the call to the right company.
-    body: dict[str, Any] = {k: v for k, v in params.config.items() if k != "node_key"}
+    # which spec to dispatch). ``org_id`` is the tenant the pack endpoint
+    # scopes the call to, so it must come from the run — never from the
+    # tenant-authored node config. Strip any config-supplied value and set
+    # ours (overwrite, not setdefault).
+    body: dict[str, Any] = {
+        k: v for k, v in params.config.items() if k not in ("node_key", "org_id")
+    }
     if params.org_id:
-        body.setdefault("org_id", params.org_id)
+        body["org_id"] = params.org_id
 
     headers = {
         "Content-Type": "application/json",
